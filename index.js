@@ -9,7 +9,13 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/', (req, res)=>{
+const mymiddleware = (req, res, next)=>{
+    console.log("middleware")
+    next();
+}
+
+app.get('/', mymiddleware, (req, res)=>{
+    console.log("object middleware")
     res.sendFile(__dirname + "/index.html");
 });
 
